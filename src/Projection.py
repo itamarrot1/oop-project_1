@@ -1,6 +1,6 @@
 import numpy as np
-import Plane
-import DenseMatrix3D
+import src.Plane as Plane
+import src.DenseMatrix3D as DenseMatrix3D
 
 
 def project_plane_to_2d(plane: Plane, volume: DenseMatrix3D, resolution: int = 256) -> np.ndarray:

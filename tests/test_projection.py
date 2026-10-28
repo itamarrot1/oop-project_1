@@ -2,27 +2,27 @@ import time
 import pytest
 import numpy as np
 import cv2
-# Import your classes and functions according to the project structure
-from VolumeLoader import VolumeLoader
-from DenseMatrix3D import DenseMatrix3D
-from CSVPointLoader import CSVPointLoader
-from Projection import project_plane_to_2d
+# Import classes and functions directly from the main directory
+from src.VolumeLoader import VolumeLoader
+from src.DenseMatrix3D import DenseMatrix3D
+from src.CSVPointLoader import CSVPointLoader
+from src.Projection import project_plane_to_2d
 
 @pytest.fixture
 def load_test_data():
     """Fixture to load the volume and the planes once for the tests."""
     
     # ==========================================
-    # <--- כאן שמים את הנתיבים לקבצים שלך --->
+    # <--- Set your file paths here --->
     # ==========================================
-    nrrd_path = "data/nrrd/MRHead_1.nrrd"  # <--- החלף בנתיב לקובץ ה-NRRD שלך
-    csv_path = "data/csvFiles/head.csv"         # <--- החלף בנתיב לקובץ ה-CSV שלך (עם 281 הנקודות)
+    nrrd_path = "data/nrrd/MRHead_1.nrrd"  # <--- Replace with the path to your NRRD file
+    csv_path = "data/csvFiles/head.csv"         # <--- Replace with the path to your CSV file
     # ==========================================
     
-    volumeLoader  = VolumeLoader(nrrd_path)   # Adjust method name if different in your class
+    volumeLoader  = VolumeLoader(nrrd_path)
     volume = volumeLoader.load()
     matrix = DenseMatrix3D(volume) 
-    csvLoader = CSVPointLoader(csv_path) # Adjust method name if different
+    csvLoader = CSVPointLoader(csv_path)
     planes = csvLoader.load_planes()
     
     return matrix, planes
@@ -34,9 +34,8 @@ def test_projection_fps_benchmark(load_test_data):
     resolution = 256
     output_filename = "mpr_output_video.mp4"
     num_frames_per_plane = 20  # Number of repetitions per plane to create a realistic benchmark load
-    total_frames = len(planes) + (len(planes) * (num_frames_per_plane - 1)) # סך הכל פרייימים מדויק
     
-    # הגדרת כתיבת הווידאו באמצעות OpenCV
+    # Configure video writer using OpenCV
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     out = cv2.VideoWriter(output_filename, fourcc, 30, (resolution, resolution), isColor=False)
     
@@ -52,14 +51,14 @@ def test_projection_fps_benchmark(load_test_data):
             # Basic validation that the function returns a matrix of the correct size
             assert projected_image.shape == (resolution, resolution)
             
-            # שמירת הפריים לסרטון רק בריצה הראשונה (כדי לא לייצר סרטון כפול וארוך מדי, או בכל ריצה אם תרצה)
+            # Save the frame to the video only on the first iteration
             if rep == 0:
                 frame = cv2.normalize(projected_image, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
                 out.write(frame)
 
     end_time = time.perf_counter()
     
-    # סגירת קובץ הווידאו
+    # Release the video writer object
     out.release()
     
     elapsed_time = end_time - start_time

@@ -1,5 +1,4 @@
 numpy
-matplotlib
 pynrrd
 pytest
 opencv-python

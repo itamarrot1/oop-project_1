@@ -3,10 +3,10 @@ import os
 import time
 import cv2
 import numpy as np
-from VolumeLoader import VolumeLoader
-from CSVPointLoader import CSVPointLoader
-from DenseMatrix3D import DenseMatrix3D
-from Projection import project_plane_to_2d
+from src.VolumeLoader import VolumeLoader
+from src.CSVPointLoader import CSVPointLoader
+from src.DenseMatrix3D import DenseMatrix3D
+from src.Projection import project_plane_to_2d
 
 def main():
     # 1. Validate command line arguments (file.nrrd, file.csv, file.mp4)

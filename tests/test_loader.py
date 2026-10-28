@@ -1,5 +1,5 @@
 import pytest
-from VolumeLoader import VolumeLoader
+from src.VolumeLoader import VolumeLoader
 
 
 @pytest.fixture

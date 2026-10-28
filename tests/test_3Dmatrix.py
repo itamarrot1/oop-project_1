@@ -1,6 +1,6 @@
 import pytest
-from VolumeLoader import VolumeLoader
-from DenseMatrix3D import DenseMatrix3D
+from src.VolumeLoader import VolumeLoader
+from src.DenseMatrix3D import DenseMatrix3D
 
 @pytest.fixture
 def data():

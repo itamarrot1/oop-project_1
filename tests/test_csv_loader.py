@@ -1,7 +1,7 @@
 import os
 import pytest
-from CSVPointLoader import CSVPointLoader
-from Plane import Plane
+from src.CSVPointLoader import CSVPointLoader
+from src.Plane import Plane
 import numpy as np
 
 FILENAME = "data/csvFiles/Ex0.csv"
