@@ -27,8 +27,7 @@ def load_test_data():
     
     return matrix, planes
 
-import cv2
-import time
+
 
 def test_projection_fps_benchmark(load_test_data):
     volume, planes = load_test_data

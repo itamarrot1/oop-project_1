@@ -39,6 +39,7 @@ The system is built as a modular Python library utilizing `NumPy` for vectorized
 ---
 
 ## 4. System Models & Architecture
-* **`DenseMatrix3D`**: Manages underlying 3D numerical data.
-* **`Plane`**: Defines spatial orientation and coordinates for slicing.
-* **`Projection`**: Core module executing the mathematical transformation from 3D to 2D.
+- **`DenseMatrix3D`**: Manages underlying 3D numerical data.
+- **`Plane`**: Defines spatial orientation and coordinates for slicing.
+- **`CsvLoader`**: Responsible for reading CSV files and converting each collection of points into a `Plane` object.
+- **`Projection`**: Core module executing the mathematical transformation from 3D to 2D.
