@@ -1,5 +1,11 @@
 # 3D Medical Imaging Processing Pipeline
 
+## 📌 Project Overview
+This project implements a high-performance **Multi-Planar Reconstruction (MPR)** pipeline for 3D medical imaging (e.g., CT and MRI scans). 
+
+In medical imaging, 3D volumetric datasets captured in NRRD formats need to be sliced and projected at arbitrary 3D spatial angles and planes defined by specific anatomical coordinate files (CSV). This repository provides an optimized, vectorized pipeline built with **Python, NumPy, and OpenCV** capable of extracting 2D cross-sectional slices and rendering high-speed MPR video sequences with an average target performance exceeding **100 FPS**.
+
+---
 ## 🚀 Quick Start: How to Run the Project
 
 Follow these simple step-by-step instructions to run the project on your machine, even if you are new to Git and GitHub!
