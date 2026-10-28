@@ -29,8 +29,14 @@ Install all required Python packages (NumPy, OpenCV, pytest, nrrd, etc.):
 ```bash
 pip install -r requirements.txt
 ```
+### Step 4: Run the Main Pipeline (`Ex0.py`)
+To execute the MPR projection pipeline, process the 3D volume using the plane coordinates from the CSV file, and generate the output video (`mpr_output_video.mp4`), run:
 
-### Step 4: Run the Benchmark & Video Generator (with Print Outputs)
+```bash
+python Ex0.py <your nrrd file path> <your csv file path> mpr_output_video.mp4
+```
+
+### Step 5(optional): Run the Benchmark & Video Generator (with Print Outputs)
 To run the automated tests, execute the high-speed MPR projection benchmark, see live print outputs directly in your terminal, and generate the output video (`mpr_output_video.mp4`):
 ```bash
 python -m pytest -s
