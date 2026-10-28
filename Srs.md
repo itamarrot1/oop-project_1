@@ -29,6 +29,7 @@ The system is built as a modular Python library utilizing `NumPy` for vectorized
 ## 3. Specific Requirements
 ### 3.1 Functional Requirements
 * **Volume Loading:** Ability to load and wrap 3D dense matrix data structures.
+* **Csv loading**: Ability to load Csv files that contains multiple points and convert them to Plane.  
 * **Plane Projection:** Map 3D spatial plane coordinates to 2D projection matrices using vectorized slicing.
 * **Video Rendering:** Compile sequential projection frames into an `.mp4` video file using `cv2.VideoWriter`.
 
