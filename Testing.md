@@ -27,3 +27,8 @@ We utilize **pytest** to automate and execute our test suite:
 To run the full automated test suite with live terminal print outputs, execute:
 ```bash
 python -m pytest -s
+```
+To run a specific test file :
+```bash
+python -m pytest -s tests/test_projection.py
+```
