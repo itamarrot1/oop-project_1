@@ -5,9 +5,10 @@ from src.DenseMatrix3D import DenseMatrix3D
 @pytest.fixture
 def data():
     """Fixture that loads the 3D matrix data once for all tests."""
-    loader = VolumeLoader("data/nrrd/MRHead_1.nrrd")
+    loader = VolumeLoader("data/nrrd/croissant.nrrd")
     raw_data = loader.load()
     matrix = DenseMatrix3D(raw_data)
+    print(f"this in shape:{matrix.shape}")
     return matrix
 
 def test_shape(data):
