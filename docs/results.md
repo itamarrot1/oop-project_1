@@ -1,12 +1,9 @@
 # Experimental Results & Performance Report
 
-### 🎥 Visualization Video
-<video src="mpr_output_video.mp4" width="100%" controls autoplay loop muted>
-  Your browser does not support the video tag.
-</video>
+
 
 ### 🖼️ Pipeline Output Screenshot
-![MPR Pipeline Output](head_result.png)
+![MPR Pipeline Output](../head_result.png)
 
 ## 1. Objective
 To evaluate the correctness, robustness, and rendering performance of the 3D Medical Imaging Processing Pipeline by executing a Multi-Planar Reconstruction (MPR) projection on a 3D volume dataset using vectorized NumPy operations.
