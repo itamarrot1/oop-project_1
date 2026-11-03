@@ -1,6 +1,0 @@
-comment,x0,y0,z0,x1,y1,z1,x2,y2,z2
-Valid Standard Plane,100,100,100,200,100,100,100,200,100
-Completely Out of Bounds Plane,600,600,600,700,600,600,600,700,600
-Partially Out of Bounds Plane,200,200,200,300,200,200,200,350,200
-Negative Coordinates Plane,-50,-50,100,50,-50,100,-50,50,100
-Diagonal Plane,50,50,50,150,150,50,50,150,150
