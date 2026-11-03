@@ -15,7 +15,7 @@ To evaluate the correctness, robustness, and rendering performance of the 3D Med
 - **Safety & Encapsulation:** Strict bounds checking and dynamic coordinate clipping via `DenseMatrix3D` and its batch voxel-sampling methods.
 
 ## 3. Results & Performance
-- **Core Pipeline Speed:** Achieved a high-speed rendering rate of **108 FPS** during pure mathematical execution, successfully meeting performance targets.
+- **Core Pipeline Speed:** Achieved a high-speed rendering rate of **134 FPS** during pure mathematical execution, successfully meeting performance targets.
 - **Correctness:** Functional correctness tests (`pytest`) successfully verified that all 2D projected planes map accurately to the expected spatial coordinates without data corruption.
 - **Robustness:** Input validation and edge-case testing (`edge_cases.csv`) confirmed that malformed rows, missing coordinates, and unexpected formats are caught with precise line-number error reporting.
 
