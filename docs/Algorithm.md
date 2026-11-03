@@ -51,6 +51,7 @@ x_indices = np.clip(np.round(grid_3d[..., 0]), 0, vol_shape[0] - 1).astype(np.in
 y_indices = np.clip(np.round(grid_3d[..., 1]), 0, vol_shape[1] - 1).astype(np.intp)
 z_indices = np.clip(np.round(grid_3d[..., 2]), 0, vol_shape[2] - 1).astype(np.intp)
 ```
+* **Valid Masking (`valid_mask`):** In addition to clamping indices with `np.clip` to prevent out-of-bounds crashes, a Boolean mask is generated to track which projected points genuinely fall within the physical boundaries of the 3D volume versus those that were artificially clipped. This ensures a clear distinction between true medical data points and edge-clamped artifacts.
 
 ### 6. Vectorized Voxel Sampling
 Samples pixel intensity values directly from the 3D volume matrix in a single vectorized operation using advanced NumPy multidimensional indexing, returning the final 2D slice ready for rendering or video output:
