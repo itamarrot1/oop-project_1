@@ -62,7 +62,8 @@ def main():
         
         for idx, plane in enumerate(planes_list):
             projected_image = project_plane_to_2d(plane, volume_matrix, resolution=resolution)
-            
+            if np.all(projected_image == 0):
+                print(f"Frame {idx}: Detected out-of-bounds plane (rendered as blank/black).")
             # Use OpenCV normalization identical to the test benchmark for visual quality
             frame = cv2.normalize(projected_image, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
             

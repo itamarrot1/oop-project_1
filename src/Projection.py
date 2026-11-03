@@ -29,13 +29,18 @@ def project_plane_to_2d(plane: Plane, volume: DenseMatrix3D, resolution: int = 2
 
     # 5. Extract volume dimensions for bounds checking
     vol_shape = volume.shape  # or volume._data.shape
-
+    valid_mask = (
+        (grid_3d[..., 0] >= 0) & (grid_3d[..., 0] < vol_shape[0]) &
+        (grid_3d[..., 1] >= 0) & (grid_3d[..., 1] < vol_shape[1]) &
+        (grid_3d[..., 2] >= 0) & (grid_3d[..., 2] < vol_shape[2])
+    )
     # Convert to integer indices with clipping to handle points outside the volume
     x_indices = np.clip(np.round(grid_3d[..., 0]), 0, vol_shape[0] - 1).astype(np.intp)
     y_indices = np.clip(np.round(grid_3d[..., 1]), 0, vol_shape[1] - 1).astype(np.intp)
     z_indices = np.clip(np.round(grid_3d[..., 2]), 0, vol_shape[2] - 1).astype(np.intp)
 
     # 6. Vectorized voxel sampling from the volume matrix
-    projected_image = volume._data[x_indices, y_indices, z_indices]
+    projected_image = volume._data[x_indices, y_indices, z_indices].copy()
+    projected_image[~valid_mask] = 0
 
     return projected_image

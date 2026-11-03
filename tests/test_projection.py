@@ -28,8 +28,33 @@ def load_test_data():
     return matrix, planes
 
 
+def test_projection_correctness(load_test_data):
+    """Functional test to thoroughly validate projection logic, shapes, types, and values."""
+    volume, planes = load_test_data
+    resolution = 256
+    
+    print("\n🔍 Running projection correctness & logic validations...")
+    
+    for i, plane in enumerate(planes):
+        projected_image = project_plane_to_2d(plane, volume, resolution)
+        
+        # 1. Shape validation: Ensure output resolution matches requirements
+        assert projected_image.shape == (resolution, resolution), \
+            f"Plane {i}: Expected shape ({resolution}, {resolution}), got {projected_image.shape}"
+        
+        # 2. Data type validation: Ensure the projection returns a valid NumPy array
+        assert isinstance(projected_image, np.ndarray), \
+            f"Plane {i}: Projected output must be a NumPy ndarray."
+        
+        # 3. Content validation: Ensure the image contains valid pixel ranges and isn't empty/corrupted
+        assert not np.isnan(projected_image).any(), \
+            f"Plane {i}: Projected image contains NaN values."
+        assert np.max(projected_image) >= 0, \
+            f"Plane {i}: Projected image contains invalid negative max values."
+
 
 def test_projection_fps_benchmark(load_test_data):
+    """Performance benchmark test measuring FPS and generating the MPR output video."""
     volume, planes = load_test_data
     resolution = 256
     output_filename = "mpr_output_video.mp4"
@@ -48,9 +73,6 @@ def test_projection_fps_benchmark(load_test_data):
         for plane in planes:
             projected_image = project_plane_to_2d(plane, volume, resolution)
             
-            # Basic validation that the function returns a matrix of the correct size
-            assert projected_image.shape == (resolution, resolution)
-            
             # Save the frame to the video only on the first iteration
             if rep == 0:
                 frame = cv2.normalize(projected_image, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
@@ -65,7 +87,7 @@ def test_projection_fps_benchmark(load_test_data):
     fps = (len(planes) * num_frames_per_plane) / elapsed_time
     
     print(f"\n" + "=" * 40)
-    print(f"          📊 FPS BENCHMARK RESULTS          ")
+    print(f"            📊 FPS BENCHMARK RESULTS            ")
     print(f"=" * 40)
     print(f"⏱️ Total runtime: {elapsed_time:.4f} seconds")
     print(f"🎯 Average frame rate: {fps:.2f} FPS")

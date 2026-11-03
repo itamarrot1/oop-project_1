@@ -11,9 +11,18 @@ class DenseMatrix3D():
     def shape(self) -> tuple[int, int, int]:
         # Returns the dimensions of the NumPy array (sx, sy, sz)
         return self._data.shape
-
+    
+    def _check_bounds(self, x: int, y: int, z: int) -> None:
+        """Helper method to validate that coordinates are within matrix bounds."""
+        sx, sy, sz = self.shape
+        if not (0 <= x < sx and 0 <= y < sy and 0 <= z < sz):
+            raise IndexError(
+                f"Coordinates ({x}, {y}, {z}) are out of bounds for shape {self.shape}"
+            )
+        
     def get_voxel(self, x: int, y: int, z: int) -> int:
-        # Retrieves a voxel value directly from the NumPy array
+        """Retrieves a voxel value after validating bounds."""
+        self._check_bounds(x, y, z)
         return int(self._data[x, y, z])
 
     def set_voxel(self, x: int, y: int, z: int, value: int) -> None:
