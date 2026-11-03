@@ -5,5 +5,3 @@ __pycache__/
 # Ignore environment variables
 config.env
 
-# Ignore benchmark output videos
-mpr_output_video.mp4

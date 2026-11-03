@@ -51,9 +51,9 @@ def main():
 
         # 5. Configure video writer (OpenCV VideoWriter) matching the test settings
         resolution = 256
-        fps_target = 30
-        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        video_writer = cv2.VideoWriter(output_mp4_path, fourcc, fps_target, (resolution, resolution), isColor=False)
+        # fps_target = 30
+        # fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        # video_writer = cv2.VideoWriter(output_mp4_path, fourcc, fps_target, (resolution, resolution), isColor=False)
 
         # 6. Iterate through each plane, perform projection, measure time, and save to video
         print(f"\n🚀 Starting video generation and performance measurement for {total_planes} planes...")
@@ -65,15 +65,15 @@ def main():
             if np.all(projected_image == 0):
                 print(f"Frame {idx}: Detected out-of-bounds plane (rendered as blank/black).")
             # Use OpenCV normalization identical to the test benchmark for visual quality
-            frame = cv2.normalize(projected_image, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
+            # frame = cv2.normalize(projected_image, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
             
             # Write the frame to the video
-            video_writer.write(frame)
+        #     video_writer.write(frame)
 
         end_time = time.perf_counter()
         
-        # Release the video writer resource
-        video_writer.release()
+        # # Release the video writer resource
+        # video_writer.release()
 
         # 7. Calculate and print performance benchmark results
         elapsed_time = end_time - start_time

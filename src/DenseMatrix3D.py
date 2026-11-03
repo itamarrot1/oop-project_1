@@ -25,6 +25,10 @@ class DenseMatrix3D():
         self._check_bounds(x, y, z)
         return int(self._data[x, y, z])
 
+    def get_voxels(self, x_indices: np.ndarray, y_indices: np.ndarray, z_indices: np.ndarray) -> np.ndarray:
+        """Retrieves a batch of voxel values for vectorized indices safely."""
+        return self._data[x_indices, y_indices, z_indices]
+
     def set_voxel(self, x: int, y: int, z: int, value: int) -> None:
         # Updates a voxel value in the NumPy array
         self._data[x, y, z] = value

@@ -8,6 +8,9 @@ def project_plane_to_2d(plane: Plane, volume: DenseMatrix3D, resolution: int = 2
     Projects a 3D plane into a 2D matrix of a predefined size.
     Uses NumPy for fast parallelized vector calculations without slow loops.
     """
+    if plane is None or not hasattr(plane, 'get_points_as_numpy'):
+        raise ValueError("Invalid plane object provided.")
+    
     # 1. Extract plane points as a NumPy array
     points = plane.get_points_as_numpy()
     if points.shape[0] < 3:
@@ -40,7 +43,7 @@ def project_plane_to_2d(plane: Plane, volume: DenseMatrix3D, resolution: int = 2
     z_indices = np.clip(np.round(grid_3d[..., 2]), 0, vol_shape[2] - 1).astype(np.intp)
 
     # 6. Vectorized voxel sampling from the volume matrix
-    projected_image = volume._data[x_indices, y_indices, z_indices].copy()
+    projected_image = volume.get_voxels(x_indices, y_indices, z_indices).copy()
     projected_image[~valid_mask] = 0
 
     return projected_image

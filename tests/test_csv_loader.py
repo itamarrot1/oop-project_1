@@ -122,3 +122,11 @@ def test_load_planes():
     assert second_plane.get_points_as_numpy().shape == (4, 3)
     
     print(f"\nSuccessfully verified {len(planes)} Plane objects with NumPy arrays!")
+
+def test_edge_cases_csv_validation():
+    loader = CSVPointLoader("data/csvFiles/edge_cases.csv")
+    
+    with pytest.raises(ValueError) as exc_info:
+        loader.load_points()
+    
+        assert "Line" in str(exc_info.value)
